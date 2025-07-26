@@ -3,9 +3,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth, db } from "../firebase";
+import { auth,db } from "../../firebase";
 import { doc, setDoc } from "firebase/firestore";
-import { Link, Navigate } from "react-router";
+import { Link } from "react-router";
 import { sendEmailVerification } from "firebase/auth";
 
 export default function Signup() {
@@ -43,10 +43,11 @@ export default function Signup() {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      if (!user.emailVerified) {
+      if (user.emailVerified) {
+        setError("Email Already Exist")
+      }else{
         await sendEmailVerification(user);
         setSucess("Verification email re-sent!");
-      }
 
       // 🔥 Ensure user Firestore doc exists (especially role!)
       const userRef = doc(db, "users", user.uid);
@@ -55,7 +56,7 @@ export default function Signup() {
         role,
         createdAt: new Date(),
       }, { merge: true });
-
+    }
     } catch (error) {
       setError(error.message.replace(/Firebase:|auth\/|-/g, " ").trim());
     }

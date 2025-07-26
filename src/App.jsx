@@ -3,10 +3,11 @@ import { Routes, Route } from "react-router";
 import './index.css'
 import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import PasswordReset from "./pages/PasswordReset";
+
 import PrivateRoute from "./components/PrivateRoute";
+import Signup from "./pages/auth/Signup";
+import Login from "./pages/auth/Login";
+import PasswordReset from "./pages/auth/PasswordReset";
 
 
 function App() {

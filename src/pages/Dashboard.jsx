@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
+import PhotoGrapherDashboard from "./photographer/PhotoGrapherDashboard";
 
 export default function Dashboard() {
   const [role, setRole] = useState("");
@@ -34,10 +35,10 @@ export default function Dashboard() {
   
 
   return (
-    <div className="p-6">
+    <div >
       <h1 className="text-2xl font-bold">
         {role === "photographer"
-          ? "📷 Photographer Dashboard"
+          ? <PhotoGrapherDashboard/>
           : "🖼️ Client Gallery"}
       </h1>
     </div>

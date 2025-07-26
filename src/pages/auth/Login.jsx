@@ -3,7 +3,7 @@ import {
   sendEmailVerification,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 import { Link, Navigate, useNavigate } from "react-router";
 
 export default function Login() {

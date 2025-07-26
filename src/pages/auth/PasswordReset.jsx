@@ -1,6 +1,6 @@
 import { sendPasswordResetEmail } from "firebase/auth";
 import { useState } from "react";
-import { auth } from "../firebase";
+import { auth } from "../../firebase";
 
 export default function PasswordReset() {
   const [email, setEmail] = useState("");
