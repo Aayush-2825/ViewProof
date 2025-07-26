@@ -7,18 +7,33 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
+# Dependency directory
+node_modules/
 
-# Editor directories and files
-.vscode/*
+# Vite build output
+dist/
+dist-ssr/
+
+# Local environment variables
+.env
+.env.*.local
+
+# Firebase cache and emulators (if using CLI)
+.firebase/
+firebase-debug.log
+firestore-debug.log
+
+# Editor directories and project files
+.vscode/
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Optional OS-specific files
+Thumbs.db
+ehthumbs.db
