@@ -1,9 +1,8 @@
 import { Navbar } from "../../components/Navbar";
 import { useAuth } from "../../hooks/auth";
-import UploadAlbum from "../../components/UploadAlbum";
 import AlbumView from "../../components/AlbumView";
 
-export default function PhotoGrapherDashboard() {
+export default function ClientDashboard() {
   const { user, loading } = useAuth();
   if (loading) {
     return (
@@ -31,11 +30,7 @@ export default function PhotoGrapherDashboard() {
           </div>
         </section>
 
-        {/* Upload Album Section */}
-        <section className="flex justify-center">
-          <UploadAlbum />
-        </section>
-
+        
         {/* Album List Section */}
         <section>
           <AlbumView />

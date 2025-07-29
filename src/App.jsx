@@ -8,6 +8,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Signup from "./pages/auth/Signup";
 import Login from "./pages/auth/Login";
 import PasswordReset from "./pages/auth/PasswordReset";
+import Album from "./pages/Album";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/reset-password" element={<PasswordReset/>}/>
         <Route element={<PrivateRoute />}>
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path='/album/:id' element={<Album />}/>
       </Route>
       </Routes>
     </>

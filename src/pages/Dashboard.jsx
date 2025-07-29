@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { auth, db } from "../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import PhotoGrapherDashboard from "./photographer/PhotoGrapherDashboard";
+import ClientDashboard from "./client/ClientDashboard";
+
+
 
 export default function Dashboard() {
   const [role, setRole] = useState("");
@@ -14,7 +17,6 @@ export default function Dashboard() {
         if (!uid) return;
         const userRef = doc(db, "users", uid);
         const userSnap = await getDoc(userRef);
-
         if (userSnap.exists()) {
           const userData = userSnap.data();
           setRole(userData.role);
@@ -32,15 +34,14 @@ export default function Dashboard() {
   }, []);
 
   if (loading) return <div className="p-6">Loading dashboard...</div>;
-  
 
   return (
-    <div >
-      <h1 className="text-2xl font-bold">
-        {role === "photographer"
-          ? <PhotoGrapherDashboard/>
-          : "🖼️ Client Gallery"}
-      </h1>
+    <div className="overflow-hidden">
+      {role === "photographer" ? (
+        <PhotoGrapherDashboard role={role}/>
+      ) : (
+        <ClientDashboard/>
+      )}
     </div>
   );
 }
