@@ -34,6 +34,7 @@ export default function AlbumView() {
         setRole(userRole);
 
         let albumQuery;
+        
         if (userRole === "photographer") {
           albumQuery = query(
             collection(db, "albums"),

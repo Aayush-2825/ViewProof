@@ -28,50 +28,56 @@ export default function Album() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const user = auth.currentUser;
-        if (!user) {
-          setError("User not logged in.");
-          return;
-        }
-
-        // Get user role
-
-        const userRef = doc(db, "users", user.uid);
-        const userSnap = await getDoc(userRef);
-        if (userSnap.exists()) {
-          const userData = userSnap.data();
-          setRole(userData.role);
-        } else {
-          console.log("No such user document!");
-        }
-
-        // Get album data
-        if (!id) {
-          setError("Invalid album ID.");
-          setLoading(false);
-          return;
-        }
-        const albumRef = doc(db, "albums", id);
-        const albumSnap = await getDoc(albumRef);
-        if (albumSnap.exists()) {
-          const data = albumSnap.data();
-          setAlbumData(albumSnap.data() as AlbumData);
-          setPhotos(data.photos || []);
-        } else {
-          setError("Album not found.");
-        }
-      } catch (err) {
-        console.error("Error:", err);
-        setError("Failed to load album. Please try again later.");
-      } finally {
-        setLoading(false);
+  const fetchData = async () => {
+    try {
+      const user = auth.currentUser;
+      if (!user) {
+        setError("User not logged in.");
+        return;
       }
-    };
 
-    fetchData();
-  }, [id]);
+      // ✅ Get user role
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (!userDoc.exists()) {
+        setError("User record not found.");
+        return;
+      }
+
+      const userData = userDoc.data();
+      const userRole = userData.role;
+      setRole(userRole);
+
+      // ✅ Fetch album
+      const albumRef = doc(db, "albums", id!);
+      const albumSnap = await getDoc(albumRef);
+      if (!albumSnap.exists()) {
+        setError("Album not found.");
+        return;
+      }
+
+      const data = albumSnap.data();
+
+      // 🔒 Restrict access
+      if (
+        (userRole === "client" && data.clientEmail !== user.email) ||
+        (userRole === "photographer" && data.createdBy !== user.uid)
+      ) {
+        setError("⛔ You are not authorized to view this album.");
+        return;
+      }
+
+      setAlbumData(data as AlbumData);
+      setPhotos(data.photos || []);
+    } catch (err) {
+      console.error("Error loading album:", err);
+      setError("Failed to load album.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchData();
+}, [id]);
 
   const toggleApproval = (index) => {
     const updated = [...photos];
