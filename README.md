@@ -1,12 +1,34 @@
-# React + Vite
+# 📸 ViewProof
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+*ViewProof* is a web platform designed for photographers to upload albums and share them with clients. Clients can view, comment on, and approve photos individually — streamlining the feedback and delivery process.
 
-Currently, two official plugins are available:
+## 🔗 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌐 [https://view-proof.vercel.app](https://view-proof.vercel.app)
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- 🔐 *Authentication & Roles* (Client / Photographer)
+- 📤 *Upload Albums* (Photographer only)
+- 📁 *Album Access by Role* (Client sees their albums, Photographer sees their uploads)
+- ✅ *Photo Approval & Commenting* (Client-side interaction per photo)
+- ✏ *Rename / Delete Albums* (Photographer)
+- 📊 *Progress Tracking* (e.g. 8/10 photos approved)
+- 🌤 *Cloudinary* used for secure, scalable photo hosting
+- 💾 *Firestore* for storing album and user data
+- 📱 *Fully Responsive UI*
+
+## ⚙ Tech Stack
+
+- *Frontend*: React + TailwindCSS
+- *Routing & State*: React Router + useState/useEffect
+- *Auth & DB*: Firebase Authentication + Firestore
+- *File Storage*: Cloudinary (with chunked upload support)
+- *Deployment*: Vercel
+
+## 🧪 Test Accounts
+
+You can create accounts with role-based access:
+- 👤 Photographer: Upload albums
+- 👥 Client: View and interact with assigned albums
+
